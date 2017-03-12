@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions
+	name="AccuService"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:req="http://nl.hu.iac/accuservice/request"
+	xmlns:rsp="http://nl.hu.iac/accuservice/response"
+	xmlns:flt="http://nl.hu.iac/accuservice/faultCheck"
+	xmlns="http://nl.hu.iac/accuservice/"
+	targetNamespace="http://nl.hu.iac/accuservice/">
+	<wsdl:types>
+		<xsd:schema>
+			<xsd:import namespace="http://nl.hu.iac/accuservice/request"
+				schemaLocation="request.xsd"/>
+			<xsd:import namespace="http://nl.hu.iac/accuservice/response"
+				schemaLocation="response.xsd"/>
+			<xsd:import namespace="http://nl.hu.iac/accuservice/faultCheck"
+				schemaLocation="faultCheck.xsd"/>
+		</xsd:schema>
+	</wsdl:types>
+		<wsdl:message name="request">
+		<wsdl:part name="request" element="req:accuRequest"/>
+	</wsdl:message>
+	<wsdl:message name="response">
+		<wsdl:part name="response" element="rsp:accuResponse"/>
+	</wsdl:message>
+	<wsdl:message name="fault">
+		<wsdl:part name="fault" element="flt:accuFault"/>
+	</wsdl:message>
+	<wsdl:portType name="accuServiceInterface">
+		<wsdl:operation name="calculateAccuPercentage">
+			<wsdl:input message="request"/>
+			<wsdl:output message="response"/>
+			<wsdl:fault name="fault" message="fault"/>
+		</wsdl:operation>
+	</wsdl:portType>
+		<wsdl:binding name="accuServiceBinding" type="accuServiceInterface">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="calculateAccuPercentage">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="accuService">
+		<wsdl:port name="WS-Port" binding="accuServiceBinding">
+			<soap:address location="http://localhost:8001/ws-producer/ws-producer"/>
+		</wsdl:port>
+	</wsdl:service>
+
+</wsdl:definitions>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://nl.hu.iac/accuservice/fault" 
+	elementFormDefault="qualified" 
+	targetNamespace="http://nl.hu.iac/accuservice/faultCheck">
+	<element name="accuFault">
+		<complexType>
+			<annotation>
+					<documentation>message is niet voor de gebruiker, kan ook null zijn</documentation>
+				</annotation>
+			<sequence>
+				<element name="errorCode" nillable="false" type="short"/>
+			</sequence>
+
+		</complexType>
+	</element> 
+</schema>
